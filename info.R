@@ -8,7 +8,7 @@ source('Config.R')
 data("sriLanka")
 
 # takes care of formatting 
-colnames(x) <- c("ID", "Pmax","Pmin","XStart","YStart","XEnd","YEnd","DateTime","PathLength","Frequency")
+colnames(x) <- c("ID", "Pmax","Pmin","YStart","XStart","YEnd","XEnd","DateTime","PathLength","Frequency")
 
 negAttenuation <- x$Pmin - x$Pmax  # computes negative attenuation
 x$Pmin <- x$Pmax <- negAttenuation
@@ -59,7 +59,7 @@ for(i in 1:length(ids))
 }
 
 cml <- cml[order(cml$ID),]
-write_csv(cml, 'info.csv')
+# write_csv(cml, 'info.csv')
 
 
 
