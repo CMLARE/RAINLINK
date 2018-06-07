@@ -123,6 +123,7 @@ Pcor <- CorrectMinMaxRSL(Data=DataOutlierFiltered,Dry=WetDry$Dry,Pref=Pref)
 
 
 
+
 ############################
 # 6. RainRetrievalMinMaxRSL#
 ############################
@@ -144,6 +145,7 @@ cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits
 # Rmean <- RainRetrievalMinMaxRSL(Aa=Aa,alpha=alpha,Data=DataPreprocessed,kRPowerLawData=kRPowerLawData,PmaxCor=Pcor$PmaxCor,PminCor=Pcor$PminCor,Pref=Pref)
 # 
 # cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
+
 
 
 # Duration of time interval of sampling strategy (min):
@@ -232,6 +234,7 @@ cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits
 DateTimeStartRainMaps <- "201803180000"  # "201109102045"
 # Date and time at which rainfall mapping ends:
 DateTimeEndRainMaps <- "201803182345" #"201109102045"
+
 # Both should be "201109102045" to reproduce Figure 5 from AMT manuscript.
 # Both should be "201109102015" to reproduce Figure 7 from AMT manuscript.
 

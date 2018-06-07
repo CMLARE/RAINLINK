@@ -1,0 +1,11 @@
+/Figures
+/LinkPathRainDepths15min
+/RainMapsLinks15min
+/csvToRdata.R
+.gitignore
+.Rproj.user
+.RData
+.Rhistory
+RAINLINK.Rproj
+csvToRdate.R
+Run.R
