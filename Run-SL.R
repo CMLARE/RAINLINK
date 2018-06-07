@@ -46,6 +46,9 @@ source("Config.R")
 # Load example data:
 data("sriLanka")
 
+colnames(x) <- c("ID", "Pmax","Pmin","XStart","YStart","XEnd","YEnd","DateTime","PathLength","Frequency")
+negAttenuation <- x$Pmin - x$Pmax
+x$Pmin <- x$Pmax <- negAttenuation
 
 # Run R function:
 StartTime <- proc.time()
@@ -86,12 +89,12 @@ Pref <- RefLevelMinMaxRSL(Data=DataPreprocessed,Dry=WetDry$Dry,HoursRefLevel=Hou
 cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
 
 
-# If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
-StartTime <- proc.time()
-
-Pref <- RefLevelMinMaxRSL(Data=DataPreprocessed,HoursRefLevel=HoursRefLevel,PeriodHoursRefLevel=PeriodHoursRefLevel)
-
-cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
+# # If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
+# StartTime <- proc.time()
+# 
+# Pref <- RefLevelMinMaxRSL(Data=DataPreprocessed,HoursRefLevel=HoursRefLevel,PeriodHoursRefLevel=PeriodHoursRefLevel)
+# 
+# cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
 
 
 
@@ -114,8 +117,9 @@ DataOutlierFiltered <- OutlierFilterMinMaxRSL(Data=DataPreprocessed,F=WetDry$F,F
 Pcor <- CorrectMinMaxRSL(Data=DataOutlierFiltered,Dry=WetDry$Dry,Pref=Pref)
 
 
-# If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
-Pcor <- CorrectMinMaxRSL(Data=DataPreprocessed,Pref=Pref)
+# # If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
+# Pcor <- CorrectMinMaxRSL(Data=DataPreprocessed,Pref=Pref)
+
 
 
 
@@ -135,12 +139,13 @@ Rmean <- RainRetrievalMinMaxRSL(Aa=Aa,alpha=alpha,Data=DataOutlierFiltered,kRPow
 cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
 
 
-# If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
-StartTime <- proc.time()
+# # If wet-dry classification (function WetDryNearbyLinkApMinMaxRSL) has not been applied, run the R function as follows:
+# StartTime <- proc.time()
+# 
+# Rmean <- RainRetrievalMinMaxRSL(Aa=Aa,alpha=alpha,Data=DataPreprocessed,kRPowerLawData=kRPowerLawData,PmaxCor=Pcor$PmaxCor,PminCor=Pcor$PminCor,Pref=Pref)
+# 
+# cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
 
-Rmean <- RainRetrievalMinMaxRSL(Aa=Aa,alpha=alpha,Data=DataPreprocessed,kRPowerLawData=kRPowerLawData,PmaxCor=Pcor$PmaxCor,PminCor=Pcor$PminCor,Pref=Pref)
-
-cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits=1)))
 
 
 # Duration of time interval of sampling strategy (min):
@@ -226,9 +231,10 @@ cat(sprintf("Finished. (%.1f seconds)\n",round((proc.time()-StartTime)[3],digits
 ############################
 
 # Date and time at which rainfall mapping starts:
-DateTimeStartRainMaps <- "201109102045"
+DateTimeStartRainMaps <- "201803180000"  # "201109102045"
 # Date and time at which rainfall mapping ends:
-DateTimeEndRainMaps <- "201109102045"
+DateTimeEndRainMaps <- "201803182345" #"201109102045"
+
 # Both should be "201109102045" to reproduce Figure 5 from AMT manuscript.
 # Both should be "201109102015" to reproduce Figure 7 from AMT manuscript.
 
@@ -255,9 +261,9 @@ RainMapsLinksTimeStep(AlphaLinksTimeStep=AlphaLinksTimeStep,AlphaPlotLocation=Al
 #########################
 
 # Date and time at which rainfall mapping starts:
-DateTimeStartRainMaps <- "201109100800"
+DateTimeStartRainMaps <- "201803180000" #"201109100800"
 # Date and time at which rainfall mapping ends:
-DateTimeEndRainMaps <- "201109110800"
+DateTimeEndRainMaps <-  "201803182345" #"201109110800"
 
 # Run function RainMapsLinksDaily:
 RainMapsLinksDaily(AlphaLinksDaily=AlphaLinksDaily,AlphaPlotLocation=AlphaPlotLocation,AlphaPolygon=AlphaPolygon,
